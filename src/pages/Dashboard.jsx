@@ -79,6 +79,7 @@ const Dashboard = () => {
       setBtnLoadingLogout(true);
       await instAxios.post("/logout");
       setBtnLoadingLogout(false);
+      redirect("/");
     } catch (err) {
       console.log(err);
       setBtnLoadingLogout(false);
