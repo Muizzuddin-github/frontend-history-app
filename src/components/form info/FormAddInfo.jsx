@@ -35,6 +35,7 @@ const FormAddInfo = ({ setShowHideFormAddInfo, setInfo, id }) => {
       setTimeout(() => {
         setShowHideFormAddInfo(false);
         setInfo((prev) => [
+          ...prev,
           {
             _id: res.data.insertedID,
             title: infoName,
@@ -43,7 +44,6 @@ const FormAddInfo = ({ setShowHideFormAddInfo, setInfo, id }) => {
               typeof image === "object" ? URL.createObjectURL(image) : image,
             created_at: new Date(),
           },
-          ...prev,
         ]);
       }, 1000);
     } catch (err) {
