@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import Category from "../../api/category";
 import instAxios from "../../api/insAxios";
 import { Helmet } from "react-helmet";
+import logo from "/history.ico";
 
 const Dashboard = () => {
   const [category, setCategory] = useState([]);
@@ -91,6 +92,7 @@ const Dashboard = () => {
     <div>
       <Helmet>
         <title>Dashboard</title>
+        <link rel="icon" href={logo} />
       </Helmet>
       {isLogin ? (
         <div className="flex justify-end">

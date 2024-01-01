@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import LoadingPage from "../components/LoadingPage";
+import logo from "/history.ico";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -88,6 +89,7 @@ const Login = () => {
     <div>
       <Helmet>
         <title>Login</title>
+        <link rel="icon" href={logo} />
       </Helmet>
       {isLogin ? (
         <LoadingPage />
