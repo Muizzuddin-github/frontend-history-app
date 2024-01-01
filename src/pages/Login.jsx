@@ -1,8 +1,10 @@
 import { Input, Button } from "@nextui-org/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Auth from "../../api/auth";
 import Alert from "../components/Alert";
 import { useNavigate } from "react-router-dom";
+
+import LoadingPage from "../components/LoadingPage";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +16,26 @@ const Login = () => {
   const [typeInput, setTypeInput] = useState("password");
   const [btnDisable, setBtnDisable] = useState(false);
   const redirect = useNavigate();
+
+  // auth
+  const [isLogin, setIslogin] = useState(true);
+
+  useEffect(
+    function () {
+      Auth.isLogin()
+        .then(() => {
+          redirect("/dashboard");
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            setIslogin(false);
+          } else {
+            console.log(err);
+          }
+        });
+    },
+    [redirect]
+  );
 
   const sendLogin = async (e) => {
     try {
@@ -61,7 +83,9 @@ const Login = () => {
     }
   };
 
-  return (
+  return isLogin ? (
+    <LoadingPage />
+  ) : (
     <div className="h-[100vh] flex justify-center items-center">
       <div className="p-5 -mt-24 w-1/2">
         <div className="p-2 h-20 w-2/3 overflow-hidden">
