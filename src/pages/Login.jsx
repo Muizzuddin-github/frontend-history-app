@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Auth from "../../api/auth";
 import Alert from "../components/Alert";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import LoadingPage from "../components/LoadingPage";
 
@@ -83,48 +84,57 @@ const Login = () => {
     }
   };
 
-  return isLogin ? (
-    <LoadingPage />
-  ) : (
-    <div className="h-[100vh] flex justify-center items-center">
-      <div className="p-5 -mt-24 w-1/2">
-        <div className="p-2 h-20 w-2/3 overflow-hidden">
-          <Alert txt={txtRes} showHide={showHide} type={alertType} />
-        </div>
-        <form
-          className="w-full flex flex-col gap-4 items-start"
-          onSubmit={sendLogin}
-        >
-          <h1 className="text-xl font-bold mb-2">Selamat datang di Bookmark</h1>
-          <div className="flex gap-3 flex-col w-full">
-            <Input
-              type="email"
-              label="Email"
-              placeholder="masukkan email anda"
-              onChange={(e) => setEmail(e.target.value)}
-              isRequired
-            />
-            <Input
-              type={typeInput}
-              label="Password"
-              placeholder="masukkan password anda"
-              onChange={(e) => setPassword(e.target.value)}
-              isRequired
-            />
-          </div>
-          <div className="flex items-center gap-5">
-            <Button color="primary" type="submit" disabled={btnDisable}>
-              Login
-            </Button>
-            <p
-              className="underline text-sm cursor-pointer"
-              onClick={showPassword}
+  return (
+    <div>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
+      {isLogin ? (
+        <LoadingPage />
+      ) : (
+        <div className="h-[100vh] flex justify-center items-center">
+          <div className="p-5 -mt-24 w-1/2">
+            <div className="p-2 h-20 w-2/3 overflow-hidden">
+              <Alert txt={txtRes} showHide={showHide} type={alertType} />
+            </div>
+            <form
+              className="w-full flex flex-col gap-4 items-start"
+              onSubmit={sendLogin}
             >
-              {txtShowPassword}
-            </p>
+              <h1 className="text-xl font-bold mb-2">
+                Selamat datang di Bookmark
+              </h1>
+              <div className="flex gap-3 flex-col w-full">
+                <Input
+                  type="email"
+                  label="Email"
+                  placeholder="masukkan email anda"
+                  onChange={(e) => setEmail(e.target.value)}
+                  isRequired
+                />
+                <Input
+                  type={typeInput}
+                  label="Password"
+                  placeholder="masukkan password anda"
+                  onChange={(e) => setPassword(e.target.value)}
+                  isRequired
+                />
+              </div>
+              <div className="flex items-center gap-5">
+                <Button color="primary" type="submit" disabled={btnDisable}>
+                  Login
+                </Button>
+                <p
+                  className="underline text-sm cursor-pointer"
+                  onClick={showPassword}
+                >
+                  {txtShowPassword}
+                </p>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
+        </div>
+      )}
     </div>
   );
 };
