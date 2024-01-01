@@ -2,7 +2,7 @@ import { Input, Button } from "@nextui-org/react";
 import { useState } from "react";
 import Auth from "../../api/auth";
 import Alert from "../components/Alert";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -98,7 +98,6 @@ const Login = () => {
             >
               {txtShowPassword}
             </p>
-            <Link to={"/dashboard"}>dasboard</Link>
           </div>
         </form>
       </div>
